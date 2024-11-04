@@ -189,10 +189,8 @@ const ListingThirteenArea = () => {
     handlePriceDropChange,
   } = UseShortedProperty({ itemsPerPage, page });
 
-  const handleResetFilter = () => {
-    resetFilters();
-  };
   const [pageCount, setPageCount] = useState(0);
+  const [show, setShow] = useState(false);
   const [skipValue, setSkipValue] = useState(0);
   const [selectedType, setSelectedType] = useState("All");
   const [propertiesData, setpropertiesData] = useState([]);
@@ -200,13 +198,16 @@ const ListingThirteenArea = () => {
   const [error, setError] = useState<string | null>(null);
   const [totalResults, setTotalResults] = useState(0);
   const [toggle, setToggle] = useState(false);
-  const handleTypeClick = (type: string) => {
-    setSelectedType(type);
-  };
-
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: number]: string;
   }>({});
+  const [styleView, setStyleView] = useState("grid");
+  const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
+    null
+  );
+  const handleTypeClick = (type: string) => {
+    setSelectedType(type);
+  };
 
   const handleSelectChange = (value: string, index: number) => {
     setSelectedOptions((prev) => ({
@@ -215,18 +216,16 @@ const ListingThirteenArea = () => {
     }));
     setOpenDropdownIndex(null);
   };
-  const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
-    null
-  );
 
   const handleDropdownClick = (index: number) => {
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
   };
 
-  const [styleView, setStyleView] = useState("grid");
-
   const handleStyleView = () => {
     setStyleView(styleView === "grid" ? "list" : "grid");
+  };
+  const handleResetFilter = () => {
+    resetFilters();
   };
 
   // useEffect(() => {
@@ -292,7 +291,6 @@ const ListingThirteenArea = () => {
   //   const newSkipValue = event.selected * itemsPerPage;
   //   setSkipValue(newSkipValue);
   // };
-  const [show, setShow] = useState(false);
 
   const handleShow = () => {
     if (show) {
